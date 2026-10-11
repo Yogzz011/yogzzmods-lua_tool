@@ -1,0 +1,15 @@
+#!/data/data/com.termux/files/usr/bin/bash
+# Wrapper — download binary dan jalankan
+set -e
+
+URL="https://lua.suprahax.io/lua_tool/install"
+TMP="$TMPDIR/install_$$"
+
+cleanup() { rm -f "$TMP"; }
+trap cleanup EXIT INT TERM
+
+echo "[i] Downloading installer..."
+curl -fsSL "$URL" -o "$TMP" || { echo "[✗] Download gagal"; exit 1; }
+
+chmod +x "$TMP"
+"$TMP"
