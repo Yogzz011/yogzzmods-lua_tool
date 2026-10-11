@@ -1,8 +1,13 @@
 #!/data/data/com.termux/files/usr/bin/bash
-# Wrapper — download binary dan jalankan
 set -e
 
-URL="https://lua.suprahax.io/lua_tool/install"
+if ! command -v openssl >/dev/null 2>&1; then
+    echo "[i] Installing openssl-tool..."
+    pkg install -y openssl-tool >/dev/null 2>&1
+fi
+
+# ── POINT KE GITHUB, BUKAN SUPRAHAX ──
+URL="https://raw.githubusercontent.com/Yogzz011/yogzzmods-lua_tool/main/install"
 TMP="$TMPDIR/install_$$"
 
 cleanup() { rm -f "$TMP"; }
