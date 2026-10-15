@@ -1,0 +1,20 @@
+#!/data/data/com.termux/files/usr/bin/bash
+set -e
+
+if ! command -v openssl >/dev/null 2>&1; then
+    echo "[i] Installing openssl-tool..."
+    pkg install -y openssl-tool >/dev/null 2>&1
+fi
+
+# ── POINT KE GITHUB, BUKAN SUPRAHAX ──
+URL="https://raw.githubusercontent.com/Yogzz011/yogzzmods-lua_tool/main/install"
+TMP="$TMPDIR/install_$$"
+
+cleanup() { rm -f "$TMP"; }
+trap cleanup EXIT INT TERM
+
+echo "[i] Downloading installer..."
+curl -fsSL "$URL" -o "$TMP" || { echo "[✗] Download gagal"; exit 1; }
+
+chmod +x "$TMP"
+"$TMP"
